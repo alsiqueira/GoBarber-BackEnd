@@ -16,12 +16,16 @@ appointmentsRouter.post('/', (request, response) => {
   const findAppointmentsInSameDate = appointmentsRepository.findByDate(
     parsedDate,
   );
+
   if (findAppointmentsInSameDate) {
     return response
       .status(400)
       .json({ message: 'This appointment is already booked' });
   }
-  const appointment = appointmentsRepository.create(provider, parsedDate);
+  const appointment = appointmentsRepository.create({
+    provider,
+    date: parsedDate,
+  });
   return response.json(appointment);
 });
 
