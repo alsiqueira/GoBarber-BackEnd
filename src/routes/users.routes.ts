@@ -14,7 +14,7 @@ usersRouter.post('/', async (request, response) => {
       email,
       password,
     });
-
+    // @ts-expect-error Aqui vai ocorrer um erro, mas estou ignorando
     delete user.password;
 
     return response.json(user);
